@@ -1,346 +1,826 @@
 /* ==========================================================================
-   1. VARIÁVEIS DE CORES E CONFIGURAÇÕES GERAIS (ESTÉTICA COQUETTE)
+   PROJECT: MST - Website Educativo (Estética Coquette)
+   VERSION: 2.0.0
+   COMPATIBILITY: Modern Browsers
+   AUTHOR: Aluno 1º Ano - Agrinho 2026
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01. DESIGN TOKENS & VARIÁVEIS GERAIS
+   -------------------------------------------------------------------------- */
 :root {
-    --cor-fundo: #fdf5f7;       /* Rosa pastel bem clarinho, quase off-white */
-    --cor-principal: #f4c2c2;   /* Rosa bebê/coquette clássico */
-    --cor-escura: #5c3a3a;      /* Marrom rosado escuro para excelente contraste de leitura */
-    --cor-detalhes: #d98894;    /* Rosa queimado para links, botões e bordas */
-    --cor-branca: #ffffff;
-    --cor-creme: #fbf0f2;
-    --fonte-principal: 'Georgia', serif;
+    /* Paleta de Cores Coquette Principal */
+    --clr-bg-primary: #fdf6f7;       /* Rosa pastel puríssimo, fundo geral */
+    --clr-bg-secondary: #fffbfb;     /* Branco rosado para blocos e seções */
+    --clr-bg-card: #fbf0f2;          /* Creme rosado suave para componentes */
+    --clr-brand-light: #fcd7d9;      /* Rosa bebê claro */
+    --clr-brand-main: #f4c2c2;       /* Rosa Coquette tradicional */
+    --clr-brand-dark: #d98894;       /* Rosa queimado médio para realces */
+    --clr-brand-deep: #b35d6a;       /* Rosa escuro vintage para links */
+    
+    /* Paleta de Contraste e Leitura (Acessibilidade) */
+    --clr-text-main: #4a2f2f;        /* Marrom rosado profundo para textos */
+    --clr-text-muted: #7d5c5c;       /* Marrom suave para subtítulos e dados */
+    --clr-text-light: #ffffff;       /* Branco absoluto para textos em botões */
+    
+    /* Estados de Interação */
+    --clr-focus-ring: #e39fa9;       /* Cor do anel de foco para acessibilidade */
+    --clr-success: #67a679;          /* Verde oliva suave para mensagens de sucesso */
+    --clr-success-bg: #f0f7f2;       /* Fundo verde pastel */
+    
+    /* Tipografia (Font Stack) */
+    --ff-serif: 'Georgia', 'Times New Roman', serif;
+    --ff-sans: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Escala de Espaçamentos (Rem-based) */
+    --space-xxs: 0.25rem;            /* 4px */
+    --space-xs: 0.5rem;              /* 8px */
+    --space-sm: 1rem;                /* 16px */
+    --space-md: 1.5rem;              /* 24px */
+    --space-lg: 2rem;                /* 32px */
+    --space-xl: 3rem;                /* 48px */
+    --space-xxl: 4.5rem;             /* 72px */
+    
+    /* Bordas e Detalhes Visuais */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+    --border-thin: 1px solid var(--clr-brand-main);
+    --border-double: 3px double var(--clr-brand-main);
+    --border-dashed: 2px dashed var(--clr-brand-dark);
+    
+    /* Sombras (Box Shadows) */
+    --shadow-sm: 0 2px 4px rgba(179, 93, 106, 0.05);
+    --shadow-md: 0 8px 16px rgba(179, 93, 106, 0.08);
+    --shadow-lg: 0 12px 24px rgba(179, 93, 106, 0.12);
+    --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+    
+    /* Transições e Animações */
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* {
+/* --------------------------------------------------------------------------
+   02. RESET MODERNO & CONFIGURAÇÕES BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* 16px base */
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
-    font-family: var(--fonte-principal);
-    background-color: var(--cor-fundo);
-    color: var(--cor-escura);
-    line-height: 1.8;
-    font-size: 11pt;
+    font-family: var(--ff-serif);
+    background-color: var(--clr-bg-primary);
+    color: var(--clr-text-main);
+    line-height: 1.75;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
+/* Ajustes de elementos de mídia */
+img, svg, picture {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* Customização de Seleção de Texto */
+::-webkit-selection {
+    background-color: var(--clr-brand-light);
+    color: var(--clr-text-main);
+}
+::selection {
+    background-color: var(--clr-brand-light);
+    color: var(--clr-text-main);
+}
+
+/* Customização da Barra de Rolagem (Scrollbar) */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: var(--clr-bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--clr-brand-main);
+    border-radius: var(--radius-full);
+    border: 3px solid var(--clr-bg-primary);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--clr-brand-dark);
+}
+
+/* --------------------------------------------------------------------------
+   03. TIPOGRAFIA COMPLEMENTAR
+   -------------------------------------------------------------------------- */
+p {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-md);
+    text-align: justify;
+    hyphens: auto;
+}
+
+strong {
+    color: var(--clr-brand-deep);
+    font-weight: 700;
+}
+
+em {
+    font-style: italic;
+    font-family: var(--ff-serif);
+}
+
+/* --------------------------------------------------------------------------
+   04. LINKS E BOTÕES (MICROINTERAÇÕES)
+   -------------------------------------------------------------------------- */
 a {
-    color: var(--cor-detalhes);
+    color: var(--clr-brand-deep);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: var(--transition-fast);
 }
 
-a:hover {
-    color: var(--cor-escura);
-    text-decoration: underline;
+a:hover, a:focus {
+    color: var(--clr-text-main);
 }
 
-/* ==========================================================================
-   2. CABEÇALHO E NAVEGAÇÃO
-   ========================================================================== */
+a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 3px solid var(--clr-focus-ring);
+    outline-offset: 2px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-brand-dark);
+    color: var(--clr-text-light) !important;
+    font-family: var(--ff-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: var(--space-sm) var(--space-xl);
+    border: 2px solid transparent;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: var(--clr-text-light);
+    opacity: 0.2;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    background-color: var(--clr-brand-deep);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------------------------------------------------
+   05. ESTRUTURA DO CABEÇALHO (HEADER & NAV)
+   -------------------------------------------------------------------------- */
 header {
-    background-color: var(--cor-branca);
-    border-bottom: 3px double var(--cor-principal);
-    padding: 20px;
+    background-color: var(--clr-bg-secondary);
+    border-bottom: var(--border-double);
+    padding: var(--space-md) var(--space-sm);
     text-align: center;
+    position: relative;
+    z-index: 10;
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-area {
+    margin-bottom: var(--space-md);
+    animation: fadeInDown 0.8s ease-out;
 }
 
 .logo-area h1 {
-    font-family: 'Georgia', serif;
-    font-size: 22pt;
-    color: var(--cor-escura);
+    font-family: var(--ff-serif);
+    font-size: 2.5rem;
+    color: var(--clr-text-main);
     font-style: italic;
+    font-weight: 400;
     letter-spacing: 1px;
-    margin-bottom: 5px;
+    margin-bottom: var(--space-xxs);
 }
 
 .logo-area p {
-    font-size: 10pt;
+    font-family: var(--ff-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--cor-detalhes);
+    letter-spacing: 3px;
+    color: var(--clr-brand-dark);
+    text-align: center;
+    margin-bottom: 0;
 }
 
 nav {
-    margin-top: 20px;
+    margin-top: var(--space-md);
 }
 
 nav ul {
     list-style: none;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
 }
 
 nav ul li {
     display: inline-block;
-    margin: 0 15px;
 }
 
 nav ul li a {
-    font-size: 10pt;
-    font-weight: bold;
+    font-family: var(--ff-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--cor-escura);
-    padding: 5px 10px;
+    color: var(--clr-text-main);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '🎀';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    font-size: 0.75rem;
+    transition: var(--transition-fast);
 }
 
 nav ul li a:hover {
-    background-color: var(--cor-fundo);
-    border-radius: 15px;
-    color: var(--cor-detalhes);
+    color: var(--clr-brand-dark);
+    background-color: var(--clr-bg-primary);
 }
 
-/* ==========================================================================
-   3. SEÇÃO DE DESTAQUE (HERO)
-   ========================================================================== */
+nav ul li a:hover::after {
+    transform: translateX(-50%) scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   06. SEÇÃO DE DESTAQUE (HERO BLOCK)
+   -------------------------------------------------------------------------- */
 .hero {
-    background-color: var(--cor-principal);
-    /* Sutil estampa poá clássica coquette feita puramente com CSS */
-    background-image: radial-gradient(var(--cor-branca) 15%, transparent 16%),
-                      radial-gradient(var(--cor-branca) 15%, transparent 16%);
-    background-size: 30px 30px;
-    background-position: 0 0, 15px 15px;
-    opacity: 0.95; 
-    padding: 60px 20px;
+    background-color: var(--clr-brand-main);
+    /* Criação da estampa clássica Coquette de bolinhas (Polka Dots) via CSS */
+    background-image: radial-gradient(var(--clr-bg-secondary) 15%, transparent 16%),
+                      radial-gradient(var(--clr-bg-secondary) 15%, transparent 16%);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+    padding: var(--space-xxl) var(--space-md);
     text-align: center;
-    border-bottom: 2px dashed var(--cor-detalhes);
+    border-bottom: var(--border-dashed);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: linear-gradient(45deg, transparent 33.333%, var(--clr-brand-main) 33.333%, var(--clr-brand-main) 66.666%, transparent 66.666%), linear-gradient(-45deg, transparent 33.333%, var(--clr-brand-main) 33.333%, var(--clr-brand-main) 66.666%, transparent 66.666%);
+    background-size: 20px 40px;
+    z-index: 1;
+    display: none; /* Reservado para refinamento de bordas onduladas */
 }
 
 .hero-content {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 35px;
-    border-radius: 20px;
-    display: inline-block;
-    max-width: 700px;
-    box-shadow: 0 4px 15px rgba(217, 136, 148, 0.2);
-    border: 1px solid var(--cor-principal);
+    background-color: rgba(255, 255, 255, 0.93);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    max-width: 780px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--clr-brand-light);
+    backdrop-filter: blur(4px);
+    animation: fadeInUp 1s ease-out;
 }
 
 .hero h2 {
-    font-size: 20pt;
-    color: var(--cor-escura);
+    font-family: var(--ff-serif);
+    font-size: 2.2rem;
+    color: var(--clr-text-main);
     font-style: italic;
-    margin-bottom: 15px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+}
+
+.hero h2::after {
+    display: none; /* Desativa o laço global para o título do Hero */
 }
 
 .hero p {
-    font-size: 11pt;
-    margin-bottom: 25px;
-    color: #6b4a4a;
+    font-family: var(--ff-serif);
+    font-size: 1.2rem;
+    color: var(--clr-text-muted);
+    text-align: center;
+    margin-bottom: var(--space-lg);
 }
 
-/* Botões Coquette com efeito delicado e arredondado */
-.btn {
-    display: inline-block;
-    background-color: var(--cor-detalhes);
-    color: var(--cor-branca) !important;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 10pt;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 2px solid transparent;
-    box-shadow: 0 3px 8px rgba(217, 136, 148, 0.4);
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: var(--cor-branca);
-    color: var(--cor-detalhes) !important;
-    border: 2px solid var(--cor-detalhes);
-    text-decoration: none;
-    transform: translateY(-2px);
-}
-
-/* ==========================================================================
-   4. CONTEÚDO E SEÇÕES
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   07. CONTAINER DO CONTEÚDO PRINCIPAL (MAIN & SECTIONS)
+   -------------------------------------------------------------------------- */
 main {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: var(--space-xl) var(--space-sm);
 }
 
 .conteudo-secao {
-    background-color: var(--cor-branca);
-    padding: 40px;
-    margin: 30px 0;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-    border: 1px solid var(--cor-creme);
+    background-color: var(--clr-bg-secondary);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(244, 194, 194, 0.3);
+    position: relative;
+    transition: var(--transition-normal);
+}
+
+.conteudo-secao:hover {
+    box-shadow: var(--shadow-md);
 }
 
 .fundinho-claro {
-    background-color: var(--cor-creme);
-    border: 1px dashed var(--cor-principal);
+    background-color: var(--clr-bg-card);
+    border: var(--border-dashed);
 }
 
-/* Detalhe estético imitando um laço divisor embaixo dos títulos */
+/* --------------------------------------------------------------------------
+   08. CABEÇALHOS INTERNOS E DIVISORES COQUETTE
+   -------------------------------------------------------------------------- */
 h2 {
-    font-size: 16pt;
-    color: var(--cor-escura);
+    font-family: var(--ff-serif);
+    font-size: 1.8rem;
+    color: var(--clr-text-main);
     text-align: center;
     font-style: italic;
-    margin-bottom: 10px;
+    font-weight: 400;
+    margin-bottom: var(--space-md);
 }
 
+/* O divisor em formato de Laço Coquette em todas as seções */
 h2::after {
-    content: " 🎀 ";
+    content: "🎀";
     display: block;
-    font-size: 12pt;
+    font-size: 1.4rem;
     text-align: center;
-    margin-top: 5px;
+    margin-top: var(--space-xs);
+    font-style: normal;
+    color: var(--clr-brand-dark);
+    opacity: 0.85;
+    animation: pulseHeart 3s infinite ease-in-out;
 }
 
 hr {
-    display: none; /* Substituído pelo lacinho decorativo do h2::after */
+    display: none; /* Removido para usar o pseudo-elemento decorativo do h2 */
 }
 
 h3 {
-    font-size: 13pt;
-    color: var(--cor-detalhes);
-    margin: 20px 0 10px 0;
+    font-family: var(--ff-serif);
+    font-size: 1.35rem;
+    color: var(--clr-brand-dark);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
     font-style: italic;
-    border-left: 3px solid var(--cor-principal);
-    padding-left: 10px;
-}
-
-p {
-    margin-bottom: 15px;
-    text-align: justify;
+    font-weight: 400;
+    border-left: 4px solid var(--clr-brand-main);
+    padding-left: var(--space-sm);
 }
 
 .subtitulo {
+    font-family: var(--ff-serif);
+    font-size: 1.15rem;
     text-align: center;
     font-style: italic;
-    color: var(--cor-detalhes);
-    margin-bottom: 25px;
+    color: var(--clr-brand-deep);
+    margin-bottom: var(--space-xl);
+}
+
+/* --------------------------------------------------------------------------
+   09. COMPONENTES: BLOCOS DE TEXTO & CITAÇÕES
+   -------------------------------------------------------------------------- */
+.texto-bloco {
+    padding: var(--space-sm) 0;
 }
 
 blockquote {
-    background-color: var(--cor-fundo);
-    border-left: 4px solid var(--cor-principal);
-    padding: 15px 20px;
-    margin: 25px 0;
+    background-color: var(--clr-bg-primary);
+    border-left: 4px solid var(--clr-brand-dark);
+    padding: var(--space-md) var(--space-lg);
+    margin: var(--space-lg) 0;
     font-style: italic;
-    border-radius: 0 10px 10px 0;
+    font-size: 1.15rem;
+    color: var(--clr-text-muted);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    position: relative;
+    box-shadow: var(--shadow-inset);
 }
 
-/* Listas com marcador de florzinha */
+blockquote::before {
+    content: "“";
+    font-size: 4rem;
+    font-family: var(--ff-serif);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    color: var(--clr-brand-light);
+    line-height: 1;
+    opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   10. COMPONENTES: LISTAS ESTILIZADAS (FLORAL)
+   -------------------------------------------------------------------------- */
 ul {
-    margin-bottom: 25px;
-    padding-left: 20px;
+    list-style: none;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-sm);
 }
 
 ul li {
-    margin-bottom: 10px;
-    list-style-type: "🌸 "; 
-    padding-left: 5px;
+    font-size: 1.05rem;
+    margin-bottom: var(--space-sm);
+    position: relative;
+    padding-left: var(--space-xl);
+    text-align: justify;
 }
 
-/* Layout dos Cards de Objetivos */
+ul li::before {
+    content: "🌸";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+}
+
+ul li:hover::before {
+    transform: rotate(45deg) scale(1.2);
+}
+
+/* --------------------------------------------------------------------------
+   11. LAYOUT DE GRIDS E CARDS (SISTEMA DE COLUNAS RESILIENTES)
+   -------------------------------------------------------------------------- */
+/* Grid responsiva que se autoajusta perfeitamente sem quebrar o layout */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
 .card {
-    background-color: var(--cor-branca);
-    border: 1px solid var(--cor-principal);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-    transition: transform 0.2s ease;
+    background-color: var(--clr-bg-secondary);
+    border: var(--border-thin);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-image: linear-gradient(to right, var(--clr-brand-light), var(--clr-brand-dark));
 }
 
 .card:hover {
-    transform: scale(1.01);
-    border-color: var(--cor-detalhes);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--clr-brand-dark);
 }
 
 .card h3 {
     margin-top: 0;
     border-left: none;
     padding-left: 0;
-    color: var(--cor-escura);
+    color: var(--clr-text-main);
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px dashed var(--clr-brand-light);
+    padding-bottom: var(--space-xs);
 }
 
-/* ==========================================================================
-   5. FORMULÁRIO INTERATIVO
-   ========================================================================== */
+.card p {
+    font-size: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+    color: var(--clr-text-muted);
+}
+
+/* Layout Flexbox para Seções Bi-colunadas */
+.conteudo-flex {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.texto-lado {
+    flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   12. FORMULÁRIOS E INTERFACES DE USUÁRIO (UI)
+   -------------------------------------------------------------------------- */
 form {
-    max-width: 500px;
+    max-width: 550px;
     margin: 0 auto;
+    padding: var(--space-md) 0;
 }
 
 .form-group {
-    margin-bottom: 20px;
-    text-align: left;
+    margin-bottom: var(--space-md);
+    position: relative;
 }
 
 label {
     display: block;
-    font-size: 10pt;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--cor-escura);
+    font-family: var(--ff-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    color: var(--clr-text-main);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 input[type="text"],
 input[type="email"] {
     width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--cor-principal);
-    background-color: var(--cor-branca);
-    border-radius: 20px;
-    font-family: var(--fonte-principal);
-    color: var(--cor-escura);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--clr-brand-main);
+    background-color: var(--clr-bg-secondary);
+    color: var(--clr-text-main);
+    font-family: var(--ff-sans);
+    font-size: 1rem;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-inset);
     outline: none;
-    transition: all 0.3s ease;
+    transition: var(--transition-fast);
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus {
-    border-color: var(--cor-detalhes);
-    box-shadow: 0 0 8px rgba(217, 136, 148, 0.3);
-    background-color: #fffbfb;
+    border-color: var(--clr-brand-dark);
+    box-shadow: 0 0 0 4px rgba(244, 194, 194, 0.4), var(--shadow-inset);
+    background-color: var(--clr-bg-secondary);
+}
+
+/* Configuração de placeholders meigos */
+input::placeholder {
+    color: #bfa3a6;
+    font-style: italic;
+    font-size: 0.9rem;
 }
 
 #form-contato button {
     display: block;
     width: 100%;
-    margin-top: 10px;
+    margin-top: var(--space-lg);
 }
 
-/* Classes utilitárias para manipulação via JavaScript */
+/* Classes Utilitárias do Sistema JavaScript */
 .escondido {
-    display: none;
+    display: none !important;
+    opacity: 0;
 }
 
 #mensagem-sucesso {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #fbebee;
-    color: var(--cor-escura);
-    border: 1px solid var(--cor-detalhes);
-    border-radius: 20px;
+    max-width: 550px;
+    margin: var(--space-lg) auto 0 auto;
+    padding: var(--space-lg);
+    background-color: var(--clr-success-bg);
+    color: var(--clr-text-main);
+    border: 2px solid var(--clr-success);
+    border-radius: var(--radius-md);
     text-align: center;
-    font-weight: bold;
+    box-shadow: var(--shadow-md);
 }
 
-/* ==========================================================================
-   6. RODAPÉ
-   ========================================================================== */
+#mensagem-sucesso p strong {
+    color: var(--clr-success);
+}
+
+/* --------------------------------------------------------------------------
+   13. RODAPÉ (FOOTER E CRÉDITOS)
+   -------------------------------------------------------------------------- */
 footer {
-    background-color: var(--cor-branca);
-    border-top: 1px solid var(--cor-principal);
-    padding: 30px 20px;
+    background-color: var(--clr-bg-secondary);
+    border-top: var(--border-thin);
+    padding: var(--space-xl) var(--space-md);
     text-align: center;
-    font-size: 9pt;
-    color: #8c7070;
-    margin-top: 50px;
+    font-family: var(--ff-sans);
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+    margin-top: var(--space-xxl);
 }
 
 footer p {
     text-align: center !important;
-    margin-bottom: 5px;
+    margin-bottom: var(--space-xs);
 }
+
+footer p:first-of-type {
+    font-weight: 600;
+    color: var(--clr-text-main);
+}
+
+/* --------------------------------------------------------------------------
+   14. ANIMAÇÕES PURAS EM CSS (KEYFRAMES)
+   -------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseHeart {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   15. MEDIA QUERIES (MEDIA QUERIES - RESPONSIVIDADE TOTAL)
+   -------------------------------------------------------------------------- */
+
+/* Dispositivos Médios (Tablets - 768px ou menos) */
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 95%; /* Reduz a escala base tipográfica levemente */
+    }
+
+    main {
+        padding: var(--space-md) var(--space-xs);
+    }
+
+    .conteudo-secao {
+        padding: var(--space-lg) var(--space-sm);
+        margin-bottom: var(--space-lg);
+    }
+
+    .logo-area h1 {
+        font-size: 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xs);
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: var(--space-xs) 0;
+        border-bottom: 1px dashed var(--clr-brand-light);
+    }
+    
+    nav ul li a::after {
+        display: none; /* Remove laços flutuantes no mobile para limpar UI */
+    }
+
+    .hero {
+        padding: var(--space-xl) var(--space-sm);
+    }
+
+    .hero-content {
+        padding: var(--space-lg) var(--space-sm);
+    }
+
+    .hero h2 {
+        font-size: 1.6rem;
+    }
+    
+    blockquote {
+        font-size: 1rem;
+        padding: var(--space-sm) var(--space-md);
+    }
+}
+
+/* Dispositivos Pequenos (Smartphones - 480px ou menos) */
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 90%;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .btn {
+        width: 100%;
+        padding: var(--space-sm) var(--space-md);
+    }
+    
+    input[type="text"],
+    input[type="email"] {
+        padding: var(--space-xs) var(--space-sm);
+    }
+}
+
+/* Suporte para Preferência de Movimento Reduzido (Acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    *, *::before, *::after {
+        animation-delay: -1ms !important;
+        animation-duration: -1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+    }
+    
+    h2::after {
+        animation: none !important;
+    }
+}
+
+/* ==========================================================================
+   FIM DO ARQUIVO CSS - PRONTO PARA O AGRINHO 2026
+   ========================================================================== */
