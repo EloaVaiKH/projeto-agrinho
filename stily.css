@@ -1,0 +1,346 @@
+/* ==========================================================================
+   1. VARIÁVEIS DE CORES E CONFIGURAÇÕES GERAIS (ESTÉTICA COQUETTE)
+   ========================================================================== */
+:root {
+    --cor-fundo: #fdf5f7;       /* Rosa pastel bem clarinho, quase off-white */
+    --cor-principal: #f4c2c2;   /* Rosa bebê/coquette clássico */
+    --cor-escura: #5c3a3a;      /* Marrom rosado escuro para excelente contraste de leitura */
+    --cor-detalhes: #d98894;    /* Rosa queimado para links, botões e bordas */
+    --cor-branca: #ffffff;
+    --cor-creme: #fbf0f2;
+    --fonte-principal: 'Georgia', serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
+    color: var(--cor-escura);
+    line-height: 1.8;
+    font-size: 11pt;
+}
+
+a {
+    color: var(--cor-detalhes);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-escura);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. CABEÇALHO E NAVEGAÇÃO
+   ========================================================================== */
+header {
+    background-color: var(--cor-branca);
+    border-bottom: 3px double var(--cor-principal);
+    padding: 20px;
+    text-align: center;
+}
+
+.logo-area h1 {
+    font-family: 'Georgia', serif;
+    font-size: 22pt;
+    color: var(--cor-escura);
+    font-style: italic;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.logo-area p {
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--cor-detalhes);
+}
+
+nav {
+    margin-top: 20px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    font-size: 10pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cor-escura);
+    padding: 5px 10px;
+}
+
+nav ul li a:hover {
+    background-color: var(--cor-fundo);
+    border-radius: 15px;
+    color: var(--cor-detalhes);
+}
+
+/* ==========================================================================
+   3. SEÇÃO DE DESTAQUE (HERO)
+   ========================================================================== */
+.hero {
+    background-color: var(--cor-principal);
+    /* Sutil estampa poá clássica coquette feita puramente com CSS */
+    background-image: radial-gradient(var(--cor-branca) 15%, transparent 16%),
+                      radial-gradient(var(--cor-branca) 15%, transparent 16%);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    opacity: 0.95; 
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 2px dashed var(--cor-detalhes);
+}
+
+.hero-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 35px;
+    border-radius: 20px;
+    display: inline-block;
+    max-width: 700px;
+    box-shadow: 0 4px 15px rgba(217, 136, 148, 0.2);
+    border: 1px solid var(--cor-principal);
+}
+
+.hero h2 {
+    font-size: 20pt;
+    color: var(--cor-escura);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 11pt;
+    margin-bottom: 25px;
+    color: #6b4a4a;
+}
+
+/* Botões Coquette com efeito delicado e arredondado */
+.btn {
+    display: inline-block;
+    background-color: var(--cor-detalhes);
+    color: var(--cor-branca) !important;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid transparent;
+    box-shadow: 0 3px 8px rgba(217, 136, 148, 0.4);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--cor-branca);
+    color: var(--cor-detalhes) !important;
+    border: 2px solid var(--cor-detalhes);
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   4. CONTEÚDO E SEÇÕES
+   ========================================================================== */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.conteudo-secao {
+    background-color: var(--cor-branca);
+    padding: 40px;
+    margin: 30px 0;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    border: 1px solid var(--cor-creme);
+}
+
+.fundinho-claro {
+    background-color: var(--cor-creme);
+    border: 1px dashed var(--cor-principal);
+}
+
+/* Detalhe estético imitando um laço divisor embaixo dos títulos */
+h2 {
+    font-size: 16pt;
+    color: var(--cor-escura);
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+h2::after {
+    content: " 🎀 ";
+    display: block;
+    font-size: 12pt;
+    text-align: center;
+    margin-top: 5px;
+}
+
+hr {
+    display: none; /* Substituído pelo lacinho decorativo do h2::after */
+}
+
+h3 {
+    font-size: 13pt;
+    color: var(--cor-detalhes);
+    margin: 20px 0 10px 0;
+    font-style: italic;
+    border-left: 3px solid var(--cor-principal);
+    padding-left: 10px;
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.subtitulo {
+    text-align: center;
+    font-style: italic;
+    color: var(--cor-detalhes);
+    margin-bottom: 25px;
+}
+
+blockquote {
+    background-color: var(--cor-fundo);
+    border-left: 4px solid var(--cor-principal);
+    padding: 15px 20px;
+    margin: 25px 0;
+    font-style: italic;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Listas com marcador de florzinha */
+ul {
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+    list-style-type: "🌸 "; 
+    padding-left: 5px;
+}
+
+/* Layout dos Cards de Objetivos */
+.card {
+    background-color: var(--cor-branca);
+    border: 1px solid var(--cor-principal);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    border-color: var(--cor-detalhes);
+}
+
+.card h3 {
+    margin-top: 0;
+    border-left: none;
+    padding-left: 0;
+    color: var(--cor-escura);
+}
+
+/* ==========================================================================
+   5. FORMULÁRIO INTERATIVO
+   ========================================================================== */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 10pt;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--cor-escura);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--cor-principal);
+    background-color: var(--cor-branca);
+    border-radius: 20px;
+    font-family: var(--fonte-principal);
+    color: var(--cor-escura);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: var(--cor-detalhes);
+    box-shadow: 0 0 8px rgba(217, 136, 148, 0.3);
+    background-color: #fffbfb;
+}
+
+#form-contato button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Classes utilitárias para manipulação via JavaScript */
+.escondido {
+    display: none;
+}
+
+#mensagem-sucesso {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fbebee;
+    color: var(--cor-escura);
+    border: 1px solid var(--cor-detalhes);
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   6. RODAPÉ
+   ========================================================================== */
+footer {
+    background-color: var(--cor-branca);
+    border-top: 1px solid var(--cor-principal);
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 9pt;
+    color: #8c7070;
+    margin-top: 50px;
+}
+
+footer p {
+    text-align: center !important;
+    margin-bottom: 5px;
+}
